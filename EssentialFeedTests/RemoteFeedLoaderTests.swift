@@ -10,6 +10,8 @@ import EssentialFeed
 
 class RemoteFeedLoaderTests: XCTestCase {
     // test initializer
+    // test method naming convention
+    //test_method-testing_behaviour-we-expect
     func test_init_doesNotRequestDataFromURL() {
         let(_, client) = makeSUT()
         //no url
@@ -17,7 +19,7 @@ class RemoteFeedLoaderTests: XCTestCase {
     }
     
     // second test
-    func test_load_requestDataFromURL() {
+    func test_load_requestsDataFromURL() {
         let url = URL(string: "https://a-given-url.com")!
         //system under test sut
         let (sut, client) = makeSUT(url: url)
