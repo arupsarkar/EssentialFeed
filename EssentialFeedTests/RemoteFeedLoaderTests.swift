@@ -6,27 +6,7 @@
 //
 
 import XCTest
-
-class RemoteFeedLoader {
-    let client: HTTPClient
-    let url: URL
-    //default url in the init function
-    init(url: URL, client: HTTPClient) {
-        self.url = url
-        self.client = client
-    }
-    //nned a collaborator like http client
-    func load() {
-        //HTTPClient.shared.requestedURL = URL(string: "https://a-url.com")
-        client.get(from: url) //not optional
-    }
-}
-//interface
-protocol HTTPClient {
-    func get(from url: URL)
-}
-
-
+import EssentialFeed
 
 class RemoteFeedLoaderTests: XCTestCase {
     // test initializer
@@ -47,6 +27,7 @@ class RemoteFeedLoaderTests: XCTestCase {
     }
     
     //create a factory method, which will return a RemoteFeedLoader
+    //returning a tuple
     private func makeSUT(url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteFeedLoader(url: url, client: client)
