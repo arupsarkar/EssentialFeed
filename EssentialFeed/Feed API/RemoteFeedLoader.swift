@@ -9,7 +9,7 @@ import Foundation
 
 //interface
 public protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (Error) -> Void)
+    func get(from url: URL, completion: @escaping (Error?, HTTPURLResponse?) -> Void)
 }
 
 
@@ -19,6 +19,7 @@ public final class RemoteFeedLoader {
     
     public enum Error: Swift.Error {
         case connectivity
+        case invalidData
     }
     //default url in the init function
     public init(url: URL, client: HTTPClient) {
@@ -28,6 +29,15 @@ public final class RemoteFeedLoader {
     //nned a collaborator like http client
     public func load(completion: @escaping (Error) -> Void ) {
         //HTTPClient.shared.requestedURL = URL(string: "https://a-url.com")
-        client.get(from: url) { error in completion(.connectivity)}
+        client.get(from: url) { error, response in
+            
+            if(response != nil) {
+                completion(.invalidData)
+            }else {
+                completion(.connectivity)
+            }
+            
+            
+        }
     }
 }
