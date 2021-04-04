@@ -26,7 +26,7 @@ public final class RemoteFeedLoader {
         self.client = client
     }
     //nned a collaborator like http client
-    public func load(completion: @escaping (Error) -> Void = { _ in}) {
+    public func load(completion: @escaping (Error) -> Void ) {
         //HTTPClient.shared.requestedURL = URL(string: "https://a-url.com")
         client.get(from: url) { error in completion(.connectivity)}
     }
